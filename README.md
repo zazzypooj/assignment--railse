@@ -10,6 +10,28 @@ Task Prioritization: Tasks can be marked as HIGH, MEDIUM, or LOW. You can also u
 
 Comments & Activity Logs: Add comments to tasks, and the system automatically tracks any changes to their status or priority.
 
+
+Assign tasks by reference (Bug #1 is here)
+This assigns all tasks for reference_id: 201 to assignee_id: 5.
+
+curl --location 'http://localhost:8080/task-mgmt/assign-by-ref' \
+--header 'Content-Type: application/json' \
+--data '{
+   "reference_id": 201,
+   "reference_type": "ENTITY",
+   "assignee_id": 5
+}'
+Fetch tasks by date (Bug #2 is here)
+This fetches tasks for assignees 1 and 2. It incorrectly includes cancelled tasks.
+
+curl --location 'http://localhost:8080/task-mgmt/fetch-by-date/v2' \
+--header 'Content-Type: application/json' \
+--data '{
+   "start_date": 1672531200000,
+   "end_date": 1735689599000,
+   "assignee_ids": [1, 2]
+}'
+
 🛠️ Built With
 Java 17 – modern and fast
 
